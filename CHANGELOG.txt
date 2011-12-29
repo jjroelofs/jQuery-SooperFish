@@ -1,0 +1,11 @@
+SooperFish 0.2, 15-06-2010
+----------------------
+
+- Added classnames to indicate when menus are multicolumn
+- Checked compatibility with jQuery 1.4, worked fine for me
+
+SooperFish 0.1, 03-06-2010
+----------------------
+
+- Added documentation and example files
+- Created the first package for distribution
