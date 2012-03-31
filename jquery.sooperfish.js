@@ -104,7 +104,7 @@ $.fn.sooperfish = function(op) {
       $.data(submenu, 'cancelHide', false);
       setTimeout(function() {
         if (!$.data(submenu, 'cancelHide')) {
-          $(submenu).animate(o.animationHide,o.speedHide,o.easingHide,function(){ o.onHide.call(submenu); });
+          $(submenu).stop(true, true).animate(o.animationHide,o.speedHide,o.easingHide,function(){ o.onHide.call(submenu); });
         }
       }, o.delay);
     }
@@ -113,7 +113,7 @@ $.fn.sooperfish = function(op) {
       var submenu = getSubmenu(this);
       if (!submenu) return;
       $.data(submenu, 'cancelHide', true);
-      $(submenu).css({zIndex: zIndex++}).animate(o.animationShow,o.speedShow,o.easingShow,function(){ o.onShow.call(submenu); });
+      $(submenu).stop(true, true).css({zIndex: zIndex++}).animate(o.animationShow,o.speedShow,o.easingShow,function(){ o.onShow.call(submenu); });
       if (this.nodeName.toLowerCase() == 'ul') {
         var li = getActuator(this);
         $(li).addClass('hover');
