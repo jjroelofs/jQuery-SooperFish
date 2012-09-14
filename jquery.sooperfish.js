@@ -1,6 +1,6 @@
 /*
- * SooperFish 0.1
- * (c) 2010 Jurriaan Roelofs - SooperThemes.com
+ * SooperFish 0.3
+ * (c) 2010+ Jurriaan Roelofs - SooperThemes.com
  * Inspired by Suckerfish, Superfish and Droppy
  * Licensed GPL: http://www.gnu.org/licenses/gpl.html
  */
@@ -23,7 +23,7 @@ $.fn.sooperfish = function(op) {
     sooperEasingHide = 'easeInTurbo';
   } else {
     sooperEasingHide = 'linear';
-  };  
+  };
   sf.defaults = {
     multiColumn  : true,
     dualColumn  : 6, //if a submenu has at least this many items it will be divided in 2 columns
@@ -40,7 +40,7 @@ $.fn.sooperfish = function(op) {
     onShow    : function(){}, //callback after showing menu
     onHide    : function(){} //callback after hiding menu
   };
-  
+
 
   //Merge default settings with o function parameter
   var o = $.extend({},sf.defaults,op);
@@ -51,16 +51,16 @@ $.fn.sooperfish = function(op) {
   }
 
   this.each(function() {
-    
+
     //Check dom for submenus
     var parentLi = $('li:has(ul)', this);
     parentLi.each(function(){
       if (o.autoArrows) { //Add autoArrows if requested
-      $('>a',this).append('<span class="'+sf.c.arrowClass+'"></span>');
+      $('> a, > span',this).append('<div class="'+sf.c.arrowClass+'"></div>');
       }
       $(this).addClass(sf.c.isParent);
     });
-    
+
     $('ul',this).css({left: 'auto',display: 'none'}); //The script needs to use display:none to make the hiding animation possible
 
     //Divide menu in columns
@@ -85,6 +85,10 @@ $.fn.sooperfish = function(op) {
       if (ele.nodeName.toLowerCase() == 'li') {
         var submenu = $('> ul', ele);
         return submenu.length ? submenu[0] : null;
+      } else if (ele.nodeName.toLowerCase() == 'span') {
+        var submenu = $(ele).parent().find('ul');
+        return submenu.length ? submenu[0] : null;
+
       } else {
         return ele;
       }
@@ -104,7 +108,7 @@ $.fn.sooperfish = function(op) {
       $.data(submenu, 'cancelHide', false);
       setTimeout(function() {
         if (!$.data(submenu, 'cancelHide')) {
-          $(submenu).animate(o.animationHide,o.speedHide,o.easingHide,function(){ o.onHide.call(submenu); });
+          $(submenu).animate(o.animationHide,o.speedHide,o.easingHide,function(){ o.onHide.call(submenu);$(this).parent().removeClass('sf-open'); });
         }
       }, o.delay);
     }
@@ -113,16 +117,17 @@ $.fn.sooperfish = function(op) {
       var submenu = getSubmenu(this);
       if (!submenu) return;
       $.data(submenu, 'cancelHide', true);
-      $(submenu).css({zIndex: zIndex++}).animate(o.animationShow,o.speedShow,o.easingShow,function(){ o.onShow.call(submenu); });
-      if (this.nodeName.toLowerCase() == 'ul') {
-        var li = getActuator(this);
-        $(li).addClass('hover');
-        $('> a', li).addClass('hover');
+      $(submenu).css({zIndex: zIndex++}).animate(o.animationShow,o.speedShow,o.easingShow,function(){ o.onShow.call(submenu);$(this).parent().addClass('sf-open'); });
+    }
+
+    // Use click/tap on touch devices and hover on normal devices.
+    if(!!('ontouchstart' in window) == false) {
+      $('li', this).unbind().hover(showSooperfishUl, hideSooperfishUl);
+    } else {
+      if ($('li > span', this).length > 0) {
+        $('li > span', this).unbind().toggle(showSooperfishUl, hideSooperfishUl);
       }
     }
-    
-    // Bind Events. Yes it's that simple!
-    $('li', this).unbind().hover(showSooperfishUl, hideSooperfishUl);
 
   });
 

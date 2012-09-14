@@ -1,3 +1,10 @@
+SooperFish 0.3, 13-09-2012
+----------------------
+
+- Added better touchscreen support, you can now make a parent menu item a
+  span tag instead of an anchor tag and it will function as a toggle to show
+  and hide the menu. It will then not function as a link.
+
 SooperFish 0.2, 15-06-2010
 ----------------------
 

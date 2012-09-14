@@ -34,7 +34,8 @@ position:relative;
 ul.sf-menu li:hover {
 visibility:inherit; /* fixes IE7 'sticky bug' */
 }
-ul.sf-menu a {
+ul.sf-menu a,
+ul.sf-menu span {
 display:block;
 position:relative;
 }
@@ -45,7 +46,8 @@ width:150px;
 top:auto;
 left:-999999px;
 }
-ul.sf-menu ul a {
+ul.sf-menu ul a,
+ul.sf-menu ul span {
 zoom:1; /* IE6/7 fix */
 }
 ul.sf-menu ul li {
@@ -84,7 +86,7 @@ left:-999999px;
 
 /* autoArrows CSS */
 
-span.sf-arrow {
+div.sf-arrow {
 width:7px;
 height:7px;
 position:absolute;
@@ -96,7 +98,7 @@ overflow:hidden; /* making sure IE6 doesn't overflow and expand the box */
 font-size:1px;
 }
 
-ul ul span.sf-arrow {
+ul ul div.sf-arrow {
 right:12px;
 top:7px;
 background-position:0 100%;

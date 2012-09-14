@@ -27,7 +27,8 @@ border-bottom:5px solid #aeff5e;
 background:#222;
 }
 
-ul#nav li a {
+ul#nav li a,
+ul#nav li span {
 padding:20px 30px;
 font-family:"Lucida Sans","Century Gothic","Franklin Gothic Book","Franklin Gothic",helvetica,arial,verdana,sans;
 text-decoration:none;
@@ -35,22 +36,25 @@ background:#222;
 color:#fff;
 }
 
-ul#nav ul li a {
+ul#nav ul li a,
+ul#nav ul li span {
 padding:10px 15px;
 }
 
 ul#nav li a:hover
-,ul#nav li a:focus {
+,ul#nav li a:focus
+,ul#nav li span:hover
+,ul#nav li span:focus {
 color:#aeff5e;
 }
 
-ul#nav span.sf-arrow {
+ul#nav div.sf-arrow {
 top:28px;
 right:6px;
 background-image:url(../images/arrows-white.png);
 }
 
-ul#nav ul span.sf-arrow {
+ul#nav ul div.sf-arrow {
 right:12px;
 top:16px;
 }

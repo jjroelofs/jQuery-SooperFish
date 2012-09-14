@@ -33,12 +33,12 @@ border-top:1px solid #000;
 margin-top:-1px;
 }
 
-span.sf-arrow {
+div.sf-arrow {
 top:18px;
 right:0;
 }
 
-ul ul span.sf-arrow {
+ul ul div.sf-arrow {
 right:12px;
 top:16px;
 }
